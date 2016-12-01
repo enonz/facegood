@@ -1,0 +1,10 @@
+halo <%= (current_user.email) if user_signed_in?%>
+
+<%= link_to 'signout', destroy_session_path(current_user), method: :delete%>
+<%= current_user.full_name%>
+<%if !current_user.provider.nil? && !current_user.uid.nil?%>
+<img src="<%=current_user.avatar_file_name%>"/>
+<a href=""> 
+<%= image_tag current_user.avatar.url(:medium)%>
+</a>
+<%end%>

@@ -27,12 +27,26 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'pg'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'seed_dump'
+gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'paperclip'
+
+source 'https://rails-assets.org' do
+	gem 'rails-assets-tether', '>= 1.1.0'
+end
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do

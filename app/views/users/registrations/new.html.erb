@@ -1,0 +1,36 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="hidden-field">
+  <input type="hidden" name="full_name" value="<%=params['userdata']['full_name']%>"/>
+  <input type="hidden" name="birthday" value="<%=params['userdata']['birthday']%>" />
+  <input type="hidden" name="avatar_file_name" value="<%=params['userdata']['avatar']%>" />
+  <input type="hidden" name="avatar_file_size" value= "511989" />
+  <input type="hidden" name="avatar_content_type" value="image/png" />
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, value: params[:email], autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
