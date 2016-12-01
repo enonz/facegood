@@ -76,30 +76,36 @@
                           </div>
                           
                           <!-- main col right -->
-                          <div class="col-sm-9">
-                          <% @posts.each do |post|%>     
+                          <div class="col-sm-9">   
                             <div class="panel panel-default">
                                 <div class="panel-heading ph">
                                   <div class="pull-right">
-                                    <a href="follow?user_id=<%=@user.id%>&followed_id=<%=post.user.id%>&post_id=<%=post.id%>&action_name=<%=controller.action_name%>" class="badge" style="margin-right:5em;"><i class="glyphicon glyphicon-plus"></i> Follow</a>
-                                    <a href="<%=post.id%>"><sup><span class="badge badge-success small"><%=post.comments.count%></span></sup><i class="glyphicon glyphicon-comment" style="padding-right:3em;"></i></a>
-                                    <a href="like?post_id=<%=post.id%>&user_id=<%=@user.id%>&action_name=<%=controller.action_name%>" ><sup><span class="badge badge-success small"><%= post.likes.count%></span></sup><i class="glyphicon glyphicon-thumbs-up gi-2x"></i></a></div> <a href="#profile"><strong><%=post.user.full_name%></strong></a>
+                                    <a href="follow?user_id=<%=@user.id%>&followed_id=<%=@post.user.id%>&post_id=<%=@post.id%>&action_name=<%=controller.action_name%>" class="badge" style="margin-right:5em;"><i class="glyphicon glyphicon-plus"></i> Follow</a>
+                                    <a href="comment?post_id=<%=@post.id%>"><sup><span class="badge badge-success small"><%=@post.comments.count%></span></sup><i class="glyphicon glyphicon-comment" style="padding-right:3em;"></i></a>
+                                    <a href="like?post_id=<%=@post.id%>&user_id=<%=@user.id%>&action_name=<%=controller.action_name%>" ><sup><span class="badge badge-success small"><%= @post.likes.count%></span></sup><i class="glyphicon glyphicon-thumbs-up gi-2x"></i></a></div> <a href="#profile"><strong><%=@post.user.full_name%></strong></a>
                                   </div>
                                   <div class="panel-body" style="padding-left:40px;">
-                                    <%=image_tag post.image.url(:medium) if post.image.present?%>
-                                    <%=post.content%>
+                                    <%=image_tag @post.image.url(:medium) if @post.image.present?%>
+                                    <%=@post.content%>
                                   </div>
-                                  <div class="panel-footer" style="padding-left:60px;min-height:130px;">
-                                      <form name='post_comment' method="POST" action="post_comment">
+                                  <div class="panel-footer" >
+                                      <form name='post_comment' method="POST" action="post_comment" style="padding-left:60px;">
                                         <%=hidden_field_tag :action_name, controller.action_name%>
-                                        <%=hidden_field_tag :post_id, post.id%>
+                                        <%=hidden_field_tag :post_id, @post.id%>
                                         <%=hidden_field_tag :user_id, @user.id%>
                                         <%=text_area_tag :comment,'', class:'form-control' ,placeholder:'comment here' %> <br/>
                                         <input type="submit" name="submit" value="Send" class="btn btn-primary btn-sm" style="float:right;"/>
                                       </form>
+                                      <br/><br/>
+                                      <hr/>
+                                    <dl style='padding-left: 40px;'>
+                                    <% @post.comments.each do |c|%>
+
+                                      <dt><strong><%=c.user.email%>  </strong></dt><dd style="padding-left:60px;"><i> says :</i> <%=c.content%></dd>
+                                    <% end %>
+                                    </dl>
                                   </div>
                               </div>
-                          <%end%>
                           </div>
                        </div><!--/row-->
                       
